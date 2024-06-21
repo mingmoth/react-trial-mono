@@ -1,30 +1,33 @@
 import { Fragment, useState } from 'react'
 
-export default function Todo({ todo, setTodos, onToggleTodo, deleteTodo, onToggleTodoEditing }) {
+export default function Todo({ todo, dispatch }) {
     const [editingTodo, setEditingTodo] = useState(todo.name)
 
     function editTodo(id) {
         setEditingTodo(todo.name)
-        onToggleTodoEditing(id)
+        dispatch({
+            type: 'toggle-edit',
+            id
+        })
     }
 
     function cancelEditTodo(id) {
-        onToggleTodoEditing(id)
+        dispatch({
+            type: 'toggle-edit',
+            id
+        })
         setEditingTodo('')
     }
 
     function saveEditingTodo(id) {
-        setTodos(oldTodos => {
-            return oldTodos.map(todo => {
-                if (todo.id === id) {
-                    return {
-                        ...todo,
-                        name: editingTodo,
-                        editing: false
-                    }
-                }
-                return todo
-            })
+        dispatch({
+            type: 'edit',
+            id,
+            name: editingTodo
+        })
+        dispatch({
+            type: 'toggle-edit',
+            id
         })
         setEditingTodo('')
     }
@@ -32,11 +35,14 @@ export default function Todo({ todo, setTodos, onToggleTodo, deleteTodo, onToggl
     return (
         <>
             <div key={todo.id}>
-                <input type="checkbox" checked={todo.checked} onChange={() => onToggleTodo(todo.id)} disabled={todo.editing} />
+                <input type="checkbox" checked={todo.checked} onChange={() => dispatch({
+                    type: 'toggle',
+                    id: todo.id
+                })} disabled={todo.editing} />
                 {todo.editing
-                            ? <input type='text' value={editingTodo} onChange={(e) => setEditingTodo(e.target.value)} />
-                            : <span>{todo.name}</span>
-                        }
+                    ? <input type='text' value={editingTodo} onChange={(e) => setEditingTodo(e.target.value)} />
+                    : <span>{todo.name}</span>
+                }
                 {todo.editing
                     ? <Fragment>
                         <button onClick={() => saveEditingTodo(todo.id)} >Save</button>
@@ -44,7 +50,7 @@ export default function Todo({ todo, setTodos, onToggleTodo, deleteTodo, onToggl
                     </Fragment>
                     : <Fragment>
                         <button onClick={() => editTodo(todo.id)} >Edit</button>
-                        <button onClick={() => deleteTodo(todo.id)} >Delete</button>
+                        <button onClick={() => dispatch({ type: 'delete', id: todo.id })} >Delete</button>
                     </Fragment>
                 }
 
