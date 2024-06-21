@@ -69,13 +69,18 @@ function TodoApp() {
 				<input type='text' value={newTodo} onChange={(e) => setNewTodo(e.target.value)} onKeyDown={handleKeyEnter} />
 				<button onClick={addTodo} >Add</button>
 			</div>
-			<div>
+            <div style={{textAlign: 'start'}}>
+                <select>
+                    <option value="all">All</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+			<div className='todo-container'>
 				{todos.map((todo) => (
 					<Todo key={todo.id} todo={todo} setTodos={setTodos} onToggleTodo={onToggleTodo} deleteTodo={deleteTodo} onToggleTodoEditing={onToggleTodoEditing} />
 				))}
 			</div>
-            <div></div>
-
 		</>
 	)
 }
