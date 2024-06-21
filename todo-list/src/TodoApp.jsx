@@ -43,8 +43,8 @@ function TodoApp() {
 	return (
 		<>
 			<h1>todos</h1>
-			<div>
-				<input type='text' value={newTodo} onChange={(e) => setNewTodo(e.target.value)} onKeyDown={handleKeyEnter} />
+			<div style={{display: 'flex', gap: '8px', alignItems: 'center', width: '100%'}}>
+				<input type='text' value={newTodo} onChange={(e) => setNewTodo(e.target.value)} onKeyDown={handleKeyEnter} style={{flex: 1}} />
 				<button onClick={addTodo} >Add</button>
 			</div>
             <div style={{textAlign: 'start'}}>

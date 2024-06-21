@@ -34,15 +34,17 @@ export default function Todo({ todo, dispatch }) {
 
     return (
         <>
-            <div key={todo.id}>
+            <div key={todo.id} style={{display: 'grid', gap: '4px', gridTemplateColumns: 'auto 100px auto auto', alignItems: 'center', width: '100%'}}>
                 <input type="checkbox" checked={todo.checked} onChange={() => dispatch({
                     type: 'toggle',
                     id: todo.id
                 })} disabled={todo.editing} />
-                {todo.editing
-                    ? <input type='text' value={editingTodo} onChange={(e) => setEditingTodo(e.target.value)} />
-                    : <span>{todo.name}</span>
-                }
+                <div style={{textAlign: 'start'}}>
+                    {todo.editing
+                        ? <div><input type='text' value={editingTodo} onChange={(e) => setEditingTodo(e.target.value)} style={{width: '100px', boxSizing: 'border-box'}} /></div>
+                        : <div>{todo.name}</div>
+                    }
+                </div>
                 {todo.editing
                     ? <Fragment>
                         <button onClick={() => saveEditingTodo(todo.id)} >Save</button>
