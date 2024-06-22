@@ -1,6 +1,6 @@
-import TodoApp from './TodoApp'
-import AddTodo from './AddTodo'
 import { TodoProvider } from './TodoContext'
+import AddTodo from './AddTodo'
+import TodoList from './TodoList'
 import './App.css'
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
 			<div style={{ display: 'flex', gap: '8px', alignItems: 'center', width: '100%' }}>
 				<AddTodo />
 			</div>
-			<TodoApp />
+			<TodoList />
 		</TodoProvider>
 	)
 }
