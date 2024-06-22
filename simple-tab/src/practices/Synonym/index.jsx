@@ -40,7 +40,7 @@ const App = () => {
                     onChange={(e) => setWord(e.target.value)}
                     placeholder="Enter a word"
                 />
-                <button type="submit" onClick={handleSubmit}>Find Synonyms</button>
+                <button type="submit">Find Synonyms</button>
             </form>
             {/* TODO: Display loading state or fetched synonyms */}
             {loading && <p>...Loading</p>}
