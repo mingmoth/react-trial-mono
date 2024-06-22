@@ -1,6 +1,6 @@
-import { useState, useReducer } from 'react'
+import { useState } from 'react'
 import Todo from './components/Todo'
-import { todoReducer } from './todoReducer'
+import { useTodos, useTodoDispatch } from './TodoContext'
 // import './todoApp.css'
 
 const filterOptions = ['all', 'active', 'completed']
@@ -16,14 +16,14 @@ const filterTodos = (todos, filter) => {
 }
 
 function TodoApp() {
-    const [todos, dispatch] = useReducer(todoReducer, [])
+    const todos = useTodos()
     const [filter, setFilter] = useState('all')
 
 	return (
 		<>
 			<h1>todos</h1>
 			<div style={{display: 'flex', gap: '8px', alignItems: 'center', width: '100%'}}>
-				<AddTodo dispatch={dispatch} />
+				<AddTodo />
 			</div>
             <div style={{textAlign: 'start'}}>
                 <select value={filter} onChange={e => setFilter(e.target.value)}>
@@ -34,14 +34,15 @@ function TodoApp() {
             </div>
 			<div className='todo-container'>
 				{filterTodos(todos, filter).map((todo) => (
-					<Todo key={todo.id} todo={todo} dispatch={dispatch} />
+					<Todo key={todo.id} todo={todo} />
 				))}
 			</div>
 		</>
 	)
 }
 
-function AddTodo({ dispatch }) {
+function AddTodo() {
+    const dispatch = useTodoDispatch()
 	const [newTodo, setNewTodo] = useState('')
 
     function addTodo() {

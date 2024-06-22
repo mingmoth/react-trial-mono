@@ -1,6 +1,8 @@
 import { Fragment, useState } from 'react'
+import { useTodoDispatch } from '../TodoContext'
 
-export default function Todo({ todo, dispatch }) {
+export default function Todo({ todo }) {
+    const dispatch = useTodoDispatch()
     const [editingTodo, setEditingTodo] = useState(todo.name)
 
     function editTodo(id) {
