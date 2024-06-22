@@ -1,3 +1,36 @@
+import { createContext, useContext, useReducer } from 'react'
+
+const TodoContext = createContext(null)
+export function useTodos() {
+    return useContext(TodoContext)
+}
+
+const TodoDispatchContext = createContext(() => {})
+export function useTodoDispatch() {
+    return useContext(TodoDispatchContext)
+}
+
+const initialTodos = [
+    {
+        id: 1,
+        checked: true,
+        name: 'Todo 1',
+        editing: false
+    },
+]
+
+export function TodoProvider({ children }) {
+    const [todos, dispatch] = useReducer(todoReducer, initialTodos)
+
+    return (
+        <TodoContext.Provider value={todos}>
+            <TodoDispatchContext.Provider value={dispatch}>
+                {children}
+            </TodoDispatchContext.Provider>
+        </TodoContext.Provider>
+    )
+}
+
 export function todoReducer(state, action) {
     switch (action.type) {
         case 'add':
