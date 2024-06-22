@@ -22,6 +22,7 @@ export default function Todo({ todo }) {
     }
 
     function saveEditingTodo(id) {
+        if(!editingTodo) return
         dispatch({
             type: 'edit',
             id,
@@ -34,6 +35,12 @@ export default function Todo({ todo }) {
         setEditingTodo('')
     }
 
+    function handleKeyEnter(e) {
+        if (e.key === 'Enter') {
+            saveEditingTodo(todo.id)
+        }
+    }
+
     return (
         <>
             <div key={todo.id} style={{display: 'grid', gap: '4px', gridTemplateColumns: 'auto 100px auto auto', alignItems: 'center', width: '100%'}}>
@@ -43,7 +50,9 @@ export default function Todo({ todo }) {
                 })} disabled={todo.editing} />
                 <div style={{textAlign: 'start'}}>
                     {todo.editing
-                        ? <div><input type='text' value={editingTodo} onChange={(e) => setEditingTodo(e.target.value)} style={{width: '100px', boxSizing: 'border-box'}} /></div>
+                        ? <div>
+                            <input type='text' value={editingTodo} onChange={(e) => setEditingTodo(e.target.value)} onKeyDown={handleKeyEnter} style={{width: '100px', boxSizing: 'border-box'}} />
+                        </div>
                         : <div>{todo.name}</div>
                     }
                 </div>
