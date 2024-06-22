@@ -1,6 +1,6 @@
 import { useState } from 'react'
+import { useTodos } from './TodoContext'
 import Todo from './components/Todo'
-import { useTodos, useTodoDispatch } from './TodoContext'
 
 const filterOptions = ['all', 'active', 'completed']
 const filterTodos = (todos, filter) => {
@@ -14,7 +14,7 @@ const filterTodos = (todos, filter) => {
     }
 }
 
-function TodoApp() {
+export default function TodoList() {
     const todos = useTodos()
     const [filter, setFilter] = useState('all')
 
@@ -35,5 +35,3 @@ function TodoApp() {
         </>
     )
 }
-
-export default TodoApp
