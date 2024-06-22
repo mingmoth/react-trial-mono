@@ -1,0 +1,12 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.emoji {
+    height: 24px;
+    width: 24px;
+    display: grid;
+    place-items: center;
+    user-select: none;
+}
