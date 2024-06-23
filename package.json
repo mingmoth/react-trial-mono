@@ -7,6 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"todo": "pnpm run --filter todo-list dev",
 		"tab": "pnpm run --filter simple-tab dev",
+		"tic": "pnpm run --filter tic-tac-toe dev",
 		"memory": "pnpm run --filter memory-card dev"
 	},
 	"keywords": [],

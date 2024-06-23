@@ -44,6 +44,8 @@ importers:
 
   simple-tab: {}
 
+  tic-tac-toe: {}
+
   todo-list: {}
 
 packages:
