@@ -2,3 +2,4 @@ packages:
   - 'todo-list'
   - 'simple-tab'
   - 'tic-tac-toe'
+  - 'memory-card'
