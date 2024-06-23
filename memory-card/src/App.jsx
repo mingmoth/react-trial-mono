@@ -28,12 +28,41 @@ const App = () => {
 
     const handleFlip = (index) => {
         // TODO: Implement handleFlip
+        if(check.includes(index)) return
+
+        setFlipped(oldFlipped => oldFlipped.map((flip, idx) => {
+            return idx === index ? true : flip
+        }))
+        setCheck(oldCheck => {
+            return [...oldCheck, index]
+        })
     };
 
     // TODO: Implement the logic to check for matching cards
+    function checkIsMatch() {
+        if(check.length !== 2) return
+
+        const [prev, next] = check
+        const isMatched = cards[prev] === cards[next]
+        if(isMatched) {
+            setCompleted(oldCompleted => ([...oldCompleted, cards[prev]]))
+        } else {
+            setFlipped(oldFlipped => oldFlipped.map((flip, idx) => {
+                return check.includes(idx) ? false : flip
+            }))
+        }
+        setCheck([])
+    }
 
     // TODO: Implement the logic to display the game status
-    const gameStatus = "";
+    const isCompleted = completed.length === 6
+    const gameStatus = isCompleted ? "completed" : "";
+
+    useEffect(() => {
+        setTimeout(() => {
+            checkIsMatch()
+        }, 500)
+    }, [check])
 
     return (
         <div className="container">
